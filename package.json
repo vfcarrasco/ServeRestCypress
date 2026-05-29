@@ -1,0 +1,26 @@
+{
+  "name": "cypress",
+  "version": "1.0.0",
+  "description": "Projeto ServRest em Cypress",
+  "license": "ISC",
+  "author": "Vitor Felipe Carrasco",
+  "type": "commonjs",
+  "main": "index.js",
+  "scripts": {
+    "test": "cypress run",
+    "report:merge": "mochawesome-merge cypress/reports/*.json > cypress/reports/report.json",
+    "report:generate": "marge cypress/reports/report.json --reportDir cypress/reports --inline",
+    "test:report": "npm run test && npm run report:merge && npm run report:generate && start cypress/reports/report.html"
+  },
+  "devDependencies": {
+    "cypress": "^15.15.0",
+    "cypress-mochawesome-reporter": "^4.0.2",
+    "mochawesome": "^7.1.4",
+    "mochawesome-merge": "^5.1.1",
+    "mochawesome-report-generator": "^6.3.2"
+  },
+  "dependencies": {
+    "dayjs": "^1.11.20"
+  },
+  "keywords": []
+}
