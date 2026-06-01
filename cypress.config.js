@@ -13,7 +13,7 @@ function getDateFileName() {
 module.exports = defineConfig({
   reporter: "cypress-mochawesome-reporter",
   reporterOptions: {
-    reportDir: 'cypress/reports/mochawesome',
+    reportDir: "cypress/reports/mochawesome",
     overwrite: false,
     html: true,
     json: true,
@@ -21,17 +21,16 @@ module.exports = defineConfig({
     embeddedScreenshots: true,
     inlineAssets: true,
     saveAllAttempts: true,
-    reportFilename: getDateFileName()
+    reportFilename: getDateFileName(), // gera nome único
   },
   e2e: {
     baseUrl: "https://front.serverest.dev",
     retries: {
       runMode: 2,
-      openMode: 0
+      openMode: 0,
     },
     setupNodeEvents(on, config) {
       require("cypress-mochawesome-reporter/plugin")(on);
     },
-    allowCypressEnv: false
-  }
+  },
 });
