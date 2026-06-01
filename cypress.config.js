@@ -6,7 +6,7 @@ module.exports = defineConfig({
     reportDir: "cypress/reports/mochawesome",
     overwrite: false,
     html: true,
-    json: false,   
+    json: false,
     charts: true,
     embeddedScreenshots: true,
     inlineAssets: true,
@@ -19,7 +19,12 @@ module.exports = defineConfig({
       openMode: 0,
     },
     setupNodeEvents(on, config) {
+      // registra o plugin, mas sem consolidar relatórios
       require("cypress-mochawesome-reporter/plugin")(on);
+      on('after:run', () => {
+        // desativa merge automático que causava erro
+        return;
+      });
     },
   },
 });
