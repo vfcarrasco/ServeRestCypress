@@ -13,7 +13,6 @@ describe('Cadastro de produto - sessão admin', function () {
         cy.get('[data-testid="preco"]').type(produto.preco.toString())
         cy.get('[data-testid="descricao"]').type(produto.descricao)
         cy.get('[data-testid="quantity"]').type(produto.quantidade.toString())
-
         cy.get('[data-testid="cadastarProdutos"]').click()
       })
     })
@@ -26,7 +25,6 @@ describe('Cadastro de produto - sessão admin', function () {
 
       cy.loginAdmin()
       cy.get('[data-testid="cadastrarProdutos"]').click()   
-
       cy.get('[data-testid="cadastarProdutos"]').click()
 
       cy.get(':nth-child(1) > :nth-child(2)').should('contain.text', 'Nome é obrigatório')

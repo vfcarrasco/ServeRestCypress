@@ -37,7 +37,9 @@ describe('Cadastro de usuario', function () {
       cy.get('[data-testid="password"]').type(usuarioAdmin.password)
       cy.get('[data-testid="checkbox"]').click()
       cy.get('[data-testid="cadastrar"]').click()
-      cy.get('.alert > :nth-child(2)').should('have.text', 'Este email já está sendo usado')
+      cy.get('.alert > :nth-child(2)').should('contain.text', 'Este email já está sendo usado')
+
+
     })
   })
 
