@@ -13,7 +13,7 @@ function getDateFileName() {
 module.exports = defineConfig({
   reporter: "cypress-mochawesome-reporter",
   reporterOptions: {
-    reportDir: "cypress/reports",
+    reportDir: 'cypress/reports/mochawesome',
     overwrite: false,
     html: true,
     json: true,
@@ -32,7 +32,6 @@ module.exports = defineConfig({
     setupNodeEvents(on, config) {
       require("cypress-mochawesome-reporter/plugin")(on);
     },
-    // 🚨 Adição importante para remover o warning
     allowCypressEnv: false
   }
 });
