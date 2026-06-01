@@ -7,7 +7,7 @@ on:
   pull_request:
     branches:
       - main
-  workflow_dispatch:   # 🔹 permite rodar manualmente pela aba Actions
+  workflow_dispatch:   # permite rodar manualmente pela aba Actions
 
 jobs:
   cypress-run:
@@ -15,22 +15,30 @@ jobs:
 
     steps:
       - name: Checkout repository
-        uses: actions/checkout@v4   # atualizado para v4
+        uses: actions/checkout@v4
 
       - name: Setup Node.js
-        uses: actions/setup-node@v4 # atualizado para v4
+        uses: actions/setup-node@v4
         with:
-          node-version: 20
+          node-version: 20   # Cypress 15 funciona melhor com Node 20
 
       - name: Install dependencies
         run: npm install
 
+      - name: Create reports folder
+        run: mkdir -p cypress/reports/mochawesome
+
       - name: Run Cypress tests
         run: npx cypress run --reporter mochawesome
 
-      # 🔹 Publica os relatórios como artefato
+      - name: Merge Mochawesome reports
+        run: npx mochawesome-merge cypress/reports/mochawesome/*.json > cypress/reports/mochawesome/mochawesome.json
+
+      - name: Generate HTML report
+        run: npx marge cypress/reports/mochawesome/mochawesome.json -f report -o cypress/reports/mochawesome
+
       - name: Upload Mochawesome reports
-        uses: actions/upload-artifact@v4   # atualizado para v4
+        uses: actions/upload-artifact@v4
         with:
           name: mochawesome-report
           path: cypress/reports/mochawesome

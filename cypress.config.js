@@ -1,15 +1,5 @@
 const { defineConfig } = require("cypress");
 
-function getDateFileName() {
-  const now = new Date();
-  const dia = String(now.getDate()).padStart(2, '0');
-  const mes = String(now.getMonth() + 1).padStart(2, '0');
-  const ano = now.getFullYear();
-  const hora = String(now.getHours()).padStart(2, '0');
-  const minuto = String(now.getMinutes()).padStart(2, '0');
-  return `${dia}_${mes}_${ano}-${hora}_${minuto}`;
-}
-
 module.exports = defineConfig({
   reporter: "cypress-mochawesome-reporter",
   reporterOptions: {
@@ -20,8 +10,8 @@ module.exports = defineConfig({
     charts: true,
     embeddedScreenshots: true,
     inlineAssets: true,
-    saveAllAttempts: true,
-    reportFilename: getDateFileName(), // gera nome único
+    saveAllAttempts: true
+    // ❌ removi o reportFilename dinâmico para não quebrar o merge
   },
   e2e: {
     baseUrl: "https://front.serverest.dev",
