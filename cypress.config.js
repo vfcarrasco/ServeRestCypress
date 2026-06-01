@@ -6,12 +6,11 @@ module.exports = defineConfig({
     reportDir: "cypress/reports/mochawesome",
     overwrite: false,
     html: true,
-    json: true,
+    json: false,   
     charts: true,
     embeddedScreenshots: true,
     inlineAssets: true,
     saveAllAttempts: true
-    // ❌ removi o reportFilename dinâmico para não quebrar o merge
   },
   e2e: {
     baseUrl: "https://front.serverest.dev",
