@@ -5,10 +5,8 @@ describe('Login de usuario', function () {
       cy.deleteUser(usuarioAdmin.email)
       cy.createUser(usuarioAdmin)
 
-      cy.visit('/login')
-      cy.get('[data-testid="email"]').type(usuarioAdmin.email)
-      cy.get('[data-testid="senha"]').type(usuarioAdmin.password)
-      cy.get('[data-testid="entrar"]').click()
+      cy.loginAdmin()
+
       cy.get('h1').should('contain.text', 'Bem Vindo ')
       cy.get('h1').should('contain.text', usuarioAdmin.nome)
     })
@@ -19,10 +17,8 @@ describe('Login de usuario', function () {
       cy.deleteUser(usuarioComum.email)
       cy.createUser(usuarioComum)
       
-      cy.visit('/login')
-      cy.get('[data-testid="email"]').type(usuarioComum.email)
-      cy.get('[data-testid="senha"]').type(usuarioComum.password)
-      cy.get('[data-testid="entrar"]').click()
+      cy.loginComum()
+
       cy.get('h1').should('contain.text', 'Serverest Store')
     })
   })
@@ -36,6 +32,7 @@ describe('Login de usuario', function () {
 
   it('Mensagem de campo vazio', function () {
     cy.fixture('usuarioAdmin').then((usuarioAdmin) => {
+      
       cy.visit('/login')
       cy.get('[data-testid="email"]').type(usuarioAdmin.email).clear()
       cy.get('[data-testid="senha"]').type(usuarioAdmin.password).clear()

@@ -6,11 +6,7 @@ describe('Cadastro de produto - sessão admin', function () {
         cy.deleteUser(usuarioAdmin.email)
         cy.createUser(usuarioAdmin)
 
-        cy.visit('/login')
-        cy.get('[data-testid="email"]').type(usuarioAdmin.email)
-        cy.get('[data-testid="senha"]').type(usuarioAdmin.password)
-        cy.get('[data-testid="entrar"]').click()
-
+        cy.loginAdmin()
         cy.get('[data-testid="cadastrarProdutos"]').click()   
 
         cy.get('[data-testid="nome"]').type(produto.nome)
@@ -28,17 +24,11 @@ describe('Cadastro de produto - sessão admin', function () {
       cy.deleteUser(usuarioAdmin.email)
       cy.createUser(usuarioAdmin)
 
-      cy.visit('/login')
-      cy.get('[data-testid="email"]').type(usuarioAdmin.email)
-      cy.get('[data-testid="senha"]').type(usuarioAdmin.password)
-      cy.get('[data-testid="entrar"]').click()
-
+      cy.loginAdmin()
       cy.get('[data-testid="cadastrarProdutos"]').click()   
 
-      // não preencher nenhum campo
       cy.get('[data-testid="cadastarProdutos"]').click()
 
-      // valida mensagens de erro
       cy.get(':nth-child(1) > :nth-child(2)').should('contain.text', 'Nome é obrigatório')
       cy.get(':nth-child(2) > :nth-child(2)').should('contain.text', 'Preco é obrigatório')
       cy.get(':nth-child(3) > :nth-child(2)').should('contain.text', 'Descricao é obrigatório')
